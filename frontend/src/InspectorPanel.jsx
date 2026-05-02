@@ -234,7 +234,7 @@ function InspectorProjectCard({ project, milestones, contract, onBlockBudget }) 
   };
 
   return (
-    <div className={`bg-[#032360] rounded-2xl border shadow-xl overflow-hidden transition-all ${isPaused ? 'border-red-500/40' : 'border-white/10'}`}>
+    <div className={`bg-white/5 backdrop-blur-xl rounded-2xl border shadow-2xl overflow-hidden transition-all ${isPaused ? 'border-red-500/40' : 'border-white/10'}`}>
       {/* Card header */}
       <div className="p-6">
         <div className="flex items-start justify-between gap-4">
@@ -321,7 +321,7 @@ function InspectorProjectCard({ project, milestones, contract, onBlockBudget }) 
 export default function InspectorPanel({ projects, contract, onRefresh }) {
   if (!projects || projects.length === 0) {
     return (
-      <div className="mb-10 bg-[#032360] rounded-2xl p-10 border border-white/10 text-center text-white/30 shadow-xl">
+      <div className="mb-10 bg-white/5 backdrop-blur-xl rounded-2xl p-10 border border-white/10 text-center text-white/30 shadow-2xl">
         <Camera className="w-10 h-10 mx-auto mb-3 opacity-20" />
         <p className="text-sm">No projects found on the ledger yet.</p>
       </div>
@@ -331,7 +331,7 @@ export default function InspectorPanel({ projects, contract, onRefresh }) {
   return (
     <div className="mb-10 space-y-6">
       {/* Header */}
-      <div className="bg-[#032360] rounded-2xl p-8 border border-white/10 shadow-xl">
+      <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-2xl">
         <h2 className="text-2xl font-serif font-bold flex items-center gap-3 text-white mb-3">
           <Camera className="text-[#F6CC63] w-6 h-6" />
           Inspector Dashboard

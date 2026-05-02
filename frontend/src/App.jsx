@@ -252,9 +252,20 @@ const App = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#FDFCF2] text-[#0C1A30] font-sans">
-      <div className="bg-[#004E9E] pb-32" style={{ borderBottomLeftRadius: '50% 5%', borderBottomRightRadius: '50% 5%' }}>
-        <nav className="border-b border-white/10 bg-[#004E9E]/80 backdrop-blur-xl sticky top-0 z-50">
+    <div className="min-h-screen bg-[#004E9E] text-white font-sans relative overflow-hidden">
+      {/* ── Background Orbs ── */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="orb orb-1" />
+        <div className="orb orb-2" />
+        <div className="orb orb-3" />
+      </div>
+      
+      {/* ── Optional Grid Overlay ── */}
+      <div className="fixed inset-0 pointer-events-none z-0 mix-blend-overlay opacity-50"
+        style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px)', backgroundSize: '60px 60px' }} />
+
+      <div className="relative z-10 pb-20">
+        <nav className="bg-[#032360]/80 backdrop-blur-xl sticky top-0 z-50 border-b border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16 items-center">
               <div className="flex items-center gap-3">
@@ -297,7 +308,7 @@ const App = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Banner */}
-          <div className="mb-12 p-8 rounded-3xl bg-[#032360] text-white shadow-2xl relative overflow-hidden border border-white/10">
+          <div className="mb-12 p-8 rounded-3xl bg-white/5 backdrop-blur-xl text-white shadow-2xl relative overflow-hidden border border-white/10">
             <div className="absolute top-0 right-0 p-8 opacity-20">
               <Shield className="w-40 h-40 text-[#F6CC63]" />
             </div>
@@ -316,7 +327,7 @@ const App = () => {
           {/* Dashboard Views */}
           {selectedRole === 'Admin' && account && (
           <>
-            <div className="mb-10 bg-[#032360] rounded-2xl p-8 border border-white/10 shadow-xl">
+            <div className="mb-10 bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-xl">
               <h2 className="text-2xl font-serif font-bold mb-6 flex items-center gap-2 text-white">
                 <PlusCircle className="text-[#F6CC63]" /> Create New Project
               </h2>
@@ -381,8 +392,6 @@ const App = () => {
               </form>
             </div>
 
-            {/* Fuzz Tester Panel */}
-            <FuzzTesterPanel />
           </>
           )}
 
@@ -396,67 +405,67 @@ const App = () => {
           )}
 
           {selectedRole === 'Inspector' && !account && (
-            <div className="mb-10 bg-[#032360] rounded-2xl p-10 border border-white/10 shadow-xl text-center text-white/40">
+            <div className="mb-10 bg-white/5 backdrop-blur-xl rounded-2xl p-10 border border-white/10 shadow-xl text-center text-white/40">
               <p className="text-sm">Connect your wallet to access the Inspector dashboard.</p>
             </div>
           )}
         </div>
       </div>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 -mt-16 relative z-10">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 -mt-8 pb-24">
         
         {/* Immersive Map */}
         {projects.length > 0 && !loading && (
           <div className="mb-16">
-            <h2 className="text-3xl font-serif font-bold mb-8 flex items-center gap-2 text-[#0C1A30]">
-              <LayoutDashboard className="text-[#004E9E]" /> Active Locations
+            <h2 className="text-3xl font-serif font-bold mb-8 flex items-center gap-3 text-white">
+              <LayoutDashboard className="text-[#F6CC63]" /> Active Locations
             </h2>
             <ProjectMap projects={projects} />
           </div>
         )}
 
         {/* Project List */}
-        <h2 className="text-3xl font-serif font-bold mb-8 flex items-center gap-2 text-[#0C1A30]">
-          <FileText className="text-[#004E9E]" /> Active Projects
+        <h2 className="text-3xl font-serif font-bold mb-8 flex items-center gap-3 text-white">
+          <FileText className="text-[#F6CC63]" /> Active Projects
         </h2>
         
         {projects.length === 0 && !loading && (
-          <div className="text-center py-16 text-[#0C1A30]/50 bg-white rounded-2xl border border-[#004E9E]/10 border-dashed">
+          <div className="text-center py-16 text-white/50 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-sm border-dashed">
             No projects found on the ledger.
           </div>
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {projects.map((p) => (
-            <div key={p.id} className="bg-white border border-[#004E9E]/10 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-transform">
+            <div key={p.id} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:bg-white/10 hover:border-white/20 transition-all group">
               <div className="p-8">
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <h3 className="text-2xl font-serif font-bold text-[#0C1A30] mb-2">{p.title}</h3>
-                    <div className="text-sm text-[#0C1A30]/60 flex items-center gap-2 font-medium">
+                    <h3 className="text-2xl font-serif font-bold text-white mb-2">{p.title}</h3>
+                    <div className="text-sm text-white/60 flex items-center gap-2 font-medium">
                       <span className="truncate w-32" title={p.contractor}>Contractor: {p.contractor.slice(0,6)}...</span>
                       <span>•</span>
                       <span>{p.location}</span>
                     </div>
                   </div>
-                  <span className={`px-4 py-1.5 rounded-full text-xs font-bold text-white shadow-sm ${statusColor[p.status]}`}>
+                  <span className={`px-4 py-1.5 rounded-full text-xs font-bold text-white shadow-sm border border-white/20 ${statusColor[p.status]}`}>
                     {statusMap[p.status]}
                   </span>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-6 mb-8 p-6 bg-[#FDFCF2] rounded-xl border border-[#004E9E]/5">
+                <div className="grid grid-cols-2 gap-6 mb-8 p-6 bg-black/20 rounded-2xl border border-white/5">
                   <div>
-                    <p className="text-xs text-[#0C1A30]/50 font-bold uppercase tracking-wider mb-1">Total Budget</p>
-                    <p className="font-mono text-xl font-bold text-[#004E9E]">₹ {p.totalBudget}</p>
+                    <p className="text-xs text-white/50 font-bold uppercase tracking-wider mb-1">Total Budget</p>
+                    <p className="font-mono text-xl font-bold text-[#F6CC63]">₹ {p.totalBudget}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-[#0C1A30]/50 font-bold uppercase tracking-wider mb-1">Released</p>
+                    <p className="text-xs text-white/50 font-bold uppercase tracking-wider mb-1">Released</p>
                     <p className="font-mono text-xl font-bold text-[#38A169]">₹ {p.releasedAmount}</p>
                   </div>
                   <div className="col-span-2">
-                    <div className="h-2 w-full bg-[#004E9E]/10 rounded-full overflow-hidden">
+                    <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-[#38A169] transition-all duration-500" 
+                        className="h-full bg-gradient-to-r from-emerald-500 to-[#F6CC63] transition-all duration-500" 
                         style={{ width: `${(parseFloat(p.releasedAmount) / parseFloat(p.totalBudget)) * 100}%` }}
                       />
                     </div>
@@ -464,15 +473,15 @@ const App = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <h4 className="text-sm font-bold text-[#004E9E] uppercase tracking-wider">Milestones</h4>
+                  <h4 className="text-sm font-bold text-[#F6CC63] uppercase tracking-wider">Milestones</h4>
                   {p.milestones.map((m) => (
-                    <div key={m.id} className="bg-white p-4 rounded-xl border border-[#004E9E]/10 shadow-sm">
+                    <div key={m.id} className="bg-black/20 p-5 rounded-2xl border border-white/5 shadow-sm hover:bg-black/30 transition-colors">
                       <div className="flex justify-between items-center mb-3">
-                        <span className="text-sm font-bold text-[#0C1A30]">{m.description}</span>
-                        <span className="text-sm font-mono font-bold text-[#004E9E]">₹ {m.amount}</span>
+                        <span className="text-sm font-bold text-white/90">{m.description}</span>
+                        <span className="text-sm font-mono font-bold text-[#F6CC63]">₹ {m.amount}</span>
                       </div>
-                      <div className="flex justify-between items-center pt-3 border-t border-[#004E9E]/10">
-                        <span className="text-xs px-3 py-1 bg-[#FDFCF2] rounded-full text-[#0C1A30]/70 font-medium border border-[#004E9E]/5">
+                      <div className="flex justify-between items-center pt-3 border-t border-white/10">
+                        <span className="text-xs px-3 py-1 bg-white/5 rounded-full text-white/70 font-medium border border-white/10">
                           Status: {mStatusMap[m.status]}
                         </span>
                         
@@ -484,7 +493,7 @@ const App = () => {
                         )}
                         {selectedRole === 'Auditor' && m.status === '1' && (
                           <div className="flex gap-3">
-                            <a href={m.proofCID} target="_blank" rel="noreferrer" className="text-xs flex items-center gap-1 text-[#004E9E] hover:underline font-bold">
+                            <a href={m.proofCID} target="_blank" rel="noreferrer" className="text-xs flex items-center gap-1 text-[#F6CC63] hover:underline font-bold">
                               <Eye className="w-4 h-4" /> View Proof
                             </a>
                             <button onClick={() => approveMilestone(p.id, m.id)} className="text-xs bg-[#38A169] hover:bg-[#2F855A] text-white px-4 py-1.5 rounded-full font-bold transition-colors">
@@ -511,19 +520,27 @@ const App = () => {
         <div className="mt-24 mb-16">
           <div className="flex justify-between items-end mb-8">
             <div>
-              <h2 className="text-3xl font-serif font-bold text-[#0C1A30] flex items-center gap-2">
-                <ShieldCheck className="text-[#004E9E]" /> Integrity Timeline
+              <h2 className="text-3xl font-serif font-bold text-white flex items-center gap-3">
+                <ShieldCheck className="text-[#F6CC63]" /> Integrity Timeline
               </h2>
-              <p className="text-sm text-[#0C1A30]/50 mt-1">Immutable proof of every single rupee allocated and spent.</p>
+              <p className="text-sm text-white/50 mt-2 tracking-wide">Immutable proof of every single rupee allocated and spent.</p>
             </div>
             <div className="hidden sm:block">
-               <span className="px-4 py-2 bg-[#004E9E]/5 text-[#004E9E] rounded-full text-xs font-bold uppercase tracking-widest border border-[#004E9E]/10">
+               <span className="px-4 py-2 bg-white/5 text-emerald-400 rounded-full text-xs font-bold uppercase tracking-widest border border-emerald-400/30 flex items-center gap-2">
+                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                  {transactions.length} Verified Entries
                </span>
             </div>
           </div>
           <TransactionLedger transactions={transactions} />
         </div>
+
+        {/* Fuzz Tester Panel (Admin Only, moved to bottom) */}
+        {selectedRole === 'Admin' && account && (
+          <div className="mt-16 mb-8">
+            <FuzzTesterPanel />
+          </div>
+        )}
 
       </main>
     </div>

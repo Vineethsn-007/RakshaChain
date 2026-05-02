@@ -37,61 +37,61 @@ const EventDescription = ({ event }) => {
   switch (type) {
     case 'ProjectCreated':
       return (
-        <p className="text-sm text-[#0C1A30]">
-          New Infrastructure Project <span className="font-bold text-[#004E9E]">"{data.title}"</span> initiated with a budget of <span className="font-mono font-bold">₹{data.budget}</span>.
+        <p className="text-sm text-white/80">
+          New Infrastructure Project <span className="font-bold text-[#F6CC63]">"{data.title}"</span> initiated with a budget of <span className="font-mono font-bold">₹{data.budget}</span>.
         </p>
       );
     case 'MilestoneSubmitted':
       return (
-        <p className="text-sm text-[#0C1A30]">
-          Contractor <span className="font-mono text-xs bg-gray-100 px-1 rounded">{data.contractor.slice(0, 10)}...</span> submitted proof for <span className="font-bold">Milestone #{data.milestoneId}</span>.
+        <p className="text-sm text-white/80">
+          Contractor <span className="font-mono text-xs bg-white/10 px-1 rounded text-white/90">{data.contractor.slice(0, 10)}...</span> submitted proof for <span className="font-bold text-white">Milestone #{data.milestoneId}</span>.
         </p>
       );
     case 'MilestoneApproved':
       return (
-        <p className="text-sm text-[#0C1A30]">
-          Auditor verified and approved Milestone #{data.milestoneId}. <span className="text-emerald-600 font-bold">₹{data.amount}</span> released to contractor.
+        <p className="text-sm text-white/80">
+          Auditor verified and approved Milestone #{data.milestoneId}. <span className="text-emerald-400 font-bold">₹{data.amount}</span> released to contractor.
         </p>
       );
     case 'MilestoneRejected':
       return (
-        <p className="text-sm text-[#0C1A30]">
-          Milestone #{data.milestoneId} was <span className="text-red-600 font-bold">Rejected</span> by Auditor. Reason: <span className="italic">"{data.reason}"</span>.
+        <p className="text-sm text-white/80">
+          Milestone #{data.milestoneId} was <span className="text-red-400 font-bold">Rejected</span> by Auditor. Reason: <span className="italic text-white/60">"{data.reason}"</span>.
         </p>
       );
     case 'RoleGranted':
       return (
-        <p className="text-sm text-[#0C1A30]">
-          Role <span className="font-bold text-purple-600">{data.role}</span> granted to <span className="font-mono text-xs bg-gray-100 px-1 rounded">{data.account.slice(0, 10)}...</span>.
+        <p className="text-sm text-white/80">
+          Role <span className="font-bold text-[#F6CC63]">{data.role}</span> granted to <span className="font-mono text-xs bg-white/10 px-1 rounded text-white/90">{data.account.slice(0, 10)}...</span>.
         </p>
       );
     case 'SuspiciousActivity':
       return (
-        <p className="text-sm text-[#E53E3E] font-bold">
+        <p className="text-sm text-red-400 font-bold">
           CRITICAL: Suspicious activity detected! Type: <span className="underline">{data.flagType}</span> on Project #{data.projectId}.
         </p>
       );
     default:
-      return <p className="text-sm text-[#0C1A30]">Blockchain transaction verified on ledger.</p>;
+      return <p className="text-sm text-white/80">Blockchain transaction verified on ledger.</p>;
   }
 };
 
 export default function TransactionLedger({ transactions }) {
   if (!transactions || transactions.length === 0) {
     return (
-      <div className="bg-white rounded-3xl p-12 text-center border border-[#004E9E]/10 border-dashed">
-        <div className="mx-auto w-16 h-16 bg-[#FDFCF2] rounded-full flex items-center justify-center mb-4">
-          <Activity className="text-[#004E9E]/30" />
+      <div className="bg-white/5 backdrop-blur-md rounded-3xl p-12 text-center border border-white/10 border-dashed">
+        <div className="mx-auto w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mb-4">
+          <Activity className="text-[#F6CC63]/50" />
         </div>
-        <h3 className="text-lg font-bold text-[#0C1A30] mb-2">Synchronizing Ledger...</h3>
-        <p className="text-sm text-[#0C1A30]/50 max-w-xs mx-auto">Connecting to Sepolia nodes to retrieve real-time transaction history.</p>
+        <h3 className="text-lg font-bold text-white mb-2">Synchronizing Ledger...</h3>
+        <p className="text-sm text-white/50 max-w-xs mx-auto">Connecting to Sepolia nodes to retrieve real-time transaction history.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-[2.5rem] shadow-2xl border border-[#004E9E]/5 overflow-hidden">
-      <div className="bg-[#032360] p-8 flex justify-between items-center">
+    <div className="bg-white/5 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-white/10 overflow-hidden">
+      <div className="bg-black/20 p-8 flex justify-between items-center border-b border-white/5">
         <div>
           <h3 className="text-2xl font-serif font-bold text-[#F6CC63] flex items-center gap-2">
             <ShieldCheck className="w-6 h-6" /> Public Transaction Ledger
@@ -111,10 +111,10 @@ export default function TransactionLedger({ transactions }) {
       <div className="p-4 md:p-8 max-h-[600px] overflow-y-auto scrollbar-hide">
         <div className="space-y-6">
           {transactions.map((tx, idx) => (
-            <div key={`${tx.hash}-${idx}`} className="group relative flex gap-6 p-4 rounded-2xl hover:bg-[#FDFCF2] transition-colors border border-transparent hover:border-[#004E9E]/10">
+            <div key={`${tx.hash}-${idx}`} className="group relative flex gap-6 p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10">
               {/* Timeline Connector */}
               {idx !== transactions.length - 1 && (
-                <div className="absolute left-[2.25rem] top-16 bottom-0 w-px bg-gradient-to-b from-[#004E9E]/10 to-transparent" />
+                <div className="absolute left-[2.25rem] top-16 bottom-0 w-px bg-gradient-to-b from-white/20 to-transparent" />
               )}
               
               <div className="relative z-10 flex-shrink-0">
@@ -123,10 +123,10 @@ export default function TransactionLedger({ transactions }) {
 
               <div className="flex-grow">
                 <div className="flex justify-between items-start mb-1">
-                   <span className="text-[10px] font-black text-[#004E9E] uppercase tracking-widest bg-[#004E9E]/5 px-2 py-0.5 rounded">
+                   <span className="text-[10px] font-black text-[#F6CC63] uppercase tracking-widest bg-[#F6CC63]/10 px-2 py-0.5 rounded">
                      {tx.type}
                    </span>
-                   <span className="text-[10px] font-bold text-[#0C1A30]/40 flex items-center gap-1">
+                   <span className="text-[10px] font-bold text-white/40 flex items-center gap-1">
                      <Clock size={10} /> {tx.time}
                    </span>
                 </div>
@@ -135,15 +135,15 @@ export default function TransactionLedger({ transactions }) {
                   <EventDescription event={tx} />
                 </div>
 
-                <div className="flex items-center justify-between pt-2 border-t border-gray-50 mt-2">
-                  <div className="flex items-center gap-2 text-[10px] font-mono text-[#0C1A30]/50 bg-gray-50 px-2 py-1 rounded">
+                <div className="flex items-center justify-between pt-3 border-t border-white/5 mt-3">
+                  <div className="flex items-center gap-2 text-[10px] font-mono text-white/50 bg-black/20 px-2 py-1 rounded">
                     Hash: {tx.hash.slice(0, 14)}...
                   </div>
                   <a 
                     href={`https://sepolia.etherscan.io/tx/${tx.hash}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[10px] font-bold text-[#004E9E] hover:underline flex items-center gap-1"
+                    className="text-[10px] font-bold text-[#F6CC63] hover:text-white transition-colors flex items-center gap-1"
                   >
                     View on Explorer <ExternalLink size={10} />
                   </a>
@@ -154,8 +154,8 @@ export default function TransactionLedger({ transactions }) {
         </div>
       </div>
       
-      <div className="bg-[#FDFCF2] p-4 text-center border-t border-[#004E9E]/5">
-        <p className="text-[10px] font-bold text-[#0C1A30]/40 uppercase tracking-widest">
+      <div className="bg-black/20 p-4 text-center border-t border-white/5">
+        <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">
           End of Ledger • Verified by RakshaChain Nodes
         </p>
       </div>

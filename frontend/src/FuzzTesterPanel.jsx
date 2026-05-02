@@ -55,8 +55,8 @@ function LiveTerminal({ logs }) {
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [logs]);
 
   return (
-    <div className="bg-[#020c18] rounded-xl border border-white/10 overflow-hidden">
-      <div className="flex items-center gap-2 px-4 py-2 border-b border-white/10 bg-[#020c18]">
+    <div className="bg-black/20 rounded-xl border border-white/10 overflow-hidden">
+      <div className="flex items-center gap-2 px-4 py-2 border-b border-white/10 bg-transparent">
         <span className="w-3 h-3 rounded-full bg-red-500" />
         <span className="w-3 h-3 rounded-full bg-[#F6CC63]" />
         <span className="w-3 h-3 rounded-full bg-emerald-500" />
@@ -174,7 +174,7 @@ function CrashDetail({ crashId, fetchCrashDetail }) {
 
       <div>
         <div className="text-[10px] uppercase tracking-wider text-white/30 mb-1">Fuzz Payload</div>
-        <pre className="bg-[#020c18] rounded-lg p-3 text-[10px] font-mono text-emerald-300 overflow-x-auto whitespace-pre-wrap">
+        <pre className="bg-black/20 rounded-lg p-3 text-[10px] font-mono text-emerald-300 overflow-x-auto whitespace-pre-wrap">
           {payloadStr}
         </pre>
       </div>
@@ -182,7 +182,7 @@ function CrashDetail({ crashId, fetchCrashDetail }) {
       {detail.response_body && (
         <div>
           <div className="text-[10px] uppercase tracking-wider text-white/30 mb-1">Server Response</div>
-          <pre className="bg-[#020c18] rounded-lg p-3 text-[10px] font-mono text-red-300 overflow-x-auto whitespace-pre-wrap max-h-24">
+          <pre className="bg-black/20 rounded-lg p-3 text-[10px] font-mono text-red-300 overflow-x-auto whitespace-pre-wrap max-h-24">
             {detail.response_body}
           </pre>
         </div>
@@ -211,7 +211,7 @@ function CrashDetail({ crashId, fetchCrashDetail }) {
               {copied ? 'Copied' : 'Copy'}
             </button>
           </div>
-          <pre className="bg-[#020c18] rounded-lg p-3 text-[10px] font-mono text-[#F6CC63]/80 overflow-x-auto whitespace-pre-wrap">
+          <pre className="bg-black/20 rounded-lg p-3 text-[10px] font-mono text-[#F6CC63]/80 overflow-x-auto whitespace-pre-wrap">
             {detail.reproduction_steps}
           </pre>
         </div>
@@ -352,7 +352,7 @@ export default function FuzzTesterPanel() {
   return (
     <div className="mb-10 space-y-6">
       {/* Header */}
-      <div className="bg-[#032360] rounded-2xl p-8 border border-white/10 shadow-xl">
+      <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-2xl">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-serif font-bold flex items-center gap-3 text-white">
             <Zap className="text-[#F6CC63] w-6 h-6" />
@@ -460,7 +460,7 @@ export default function FuzzTesterPanel() {
       {/* Main grid: crash feed + detail */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Left: crash feed + tabs */}
-        <div className="bg-[#032360] rounded-2xl p-6 border border-white/10 shadow-xl">
+        <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 shadow-2xl">
           <div className="flex items-center gap-3 mb-4">
             <button
               onClick={() => setActiveTab('crashes')}
@@ -489,14 +489,14 @@ export default function FuzzTesterPanel() {
         </div>
 
         {/* Right: crash detail */}
-        <div className="bg-[#032360] rounded-2xl p-6 border border-white/10 shadow-xl min-h-[300px]">
+        <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 shadow-2xl min-h-[300px]">
           <CrashDetail crashId={selectedCrashId} fetchCrashDetail={fetchCrashDetail} />
         </div>
       </div>
 
       {/* Severity breakdown */}
       {sevTotal > 0 && (
-        <div className="bg-[#032360] rounded-2xl p-6 border border-white/10 shadow-xl">
+        <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 shadow-2xl">
           <h3 className="text-sm font-bold text-white/60 uppercase tracking-wider mb-4">Vulnerability Breakdown</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
