@@ -1,0 +1,25 @@
+{
+  "base_url": "http://localhost:8000",
+  "endpoints": [
+    {
+      "path": "/api/login",
+      "method": "POST",
+      "fields": { "username": "string", "password": "string" }
+    },
+    {
+      "path": "/api/add-transaction",
+      "method": "POST",
+      "fields": { "amount": "number", "to": "string", "purpose": "string" }
+    },
+    {
+      "path": "/api/funds/{id}",
+      "method": "GET",
+      "fields": { "id": "path_param" }
+    },
+    {
+      "path": "/api/flag-transaction",
+      "method": "POST",
+      "fields": { "transaction_id": "string", "reason": "string" }
+    }
+  ]
+}
